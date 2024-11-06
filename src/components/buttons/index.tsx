@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 type Button = {
   label: string;
-  buttonType: string;
+  isTypePrimary: boolean;
   action?: () => void;
 };
 
@@ -12,17 +12,17 @@ type ButtonsProps = {
 
 export default function Buttons({ buttons }: ButtonsProps) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container}>      
       {buttons.map((button) => (
         <TouchableOpacity
           style={[
             styles.buttonStyle,
-            button.buttonType === 'primary' ? styles.primary : styles.secondary
+            button.isTypePrimary ? styles.primary : styles.secondary
           ]}
           disabled={!button.action}
           onPress={button.action}
         >
-          <Text style={button.buttonType === 'secondary' ? styles.secondary : null}>
+          <Text style={!button.isTypePrimary ? styles.secondary : null}>
             {button.label}
           </Text>
         </TouchableOpacity>
